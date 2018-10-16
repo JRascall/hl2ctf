@@ -1,0 +1,13 @@
+"hl2ctf"
+{
+	"base"		"base"
+	"title"		"HL2 Capture The Flag"
+	"maps"		""
+	"menusystem"	"1"
+	"workshopid"	"15895"
+
+	"settings"
+	{
+	}
+
+}
