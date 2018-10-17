@@ -6,6 +6,6 @@ end
 
 net.Receive(FlagNetEvents.FlagCaptured, function() 
     local teamName = net.ReadString()
-    if teamName == "Red" then surface.PlaySound("red_flag_taken.wav")
-    elseif teamName == "Blue" then surface.PlaySound("blue_flag_taken.wav") end
+    if teamName == "red" then surface.PlaySound("red_flag_taken.wav")
+    elseif teamName == "blue" then surface.PlaySound("blue_flag_taken.wav") end
 end)

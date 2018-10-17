@@ -1,7 +1,6 @@
 --Server Round Manager
 util.AddNetworkString(ERoundEvents.R_STARTED)
 util.AddNetworkString(ERoundEvents.R_ENDED)
-util.AddNetworkString(ERoundEvents.R_START)
 
 RoundManager = {
     InRound = false,
@@ -34,8 +33,4 @@ function RoundManager:PlayerInitalSpawn(ply)
     --    self:StartRound()
     --end
 end
-
-net.Receive(ERoundEvents.R_START, function(len) 
-    RoundManager:StartRound()
-end)
 

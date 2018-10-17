@@ -9,17 +9,5 @@ function GM:ChatText( playerindex, playername, text, filter )
 end
 
 function GM:OnPlayerChat(ply, text, teamChat, isDead)
-    print(text)
-    if text == "/bluewin" then
-        surface.PlaySound("blue_team_scores.wav")
-    elseif text == "/startRound" then
-        net.Start(ERoundEvents.R_START)
-        net.SendToServer()
-    elseif string.find(text, "/spawnFlag") ~= nil then
-        local args = split(text, " ")
-        
-        net.Start("spawnFlag")
-        net.WriteString(args[2])
-        net.SendToServer()
-    end
+    
 end
