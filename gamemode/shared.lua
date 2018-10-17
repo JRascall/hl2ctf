@@ -24,3 +24,4 @@ function GM:PlayerInitialSpawn( ply )
         v:ChatPrint(ply:GetName() .. " has joined the " .. team.Name ..  " team")
     end
 end 
+

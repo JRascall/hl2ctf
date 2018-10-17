@@ -7,7 +7,7 @@ hook.Add("HUDPaint", "roundTimerUI", function()
     if(seconds < 10) then seconds = "0" .. seconds end
 
     if(roundTimeSecs > 0) then
-        draw.DrawText(minutes .. " : " .. seconds, "CloseCaption_Normal", ScrW() * 0.5, 10, Color(255,255,255,255), 1)
+        draw.DrawText(minutes .. ":" .. seconds, "CloseCaption_Normal", ScrW() * 0.5, 10, Color(255,255,255,255), 1)
     end
 end)
 
