@@ -2,6 +2,10 @@ include('shared.lua')
 
 function ENT:Draw() 
     self:DrawModel()
+
+    local ang = self:GetAngles()
+    ang:RotateAroundAxis(self:GetUp(), FrameTime() * 20)
+    self:SetAngles(ang)
 end
 
 net.Receive(FlagNetEvents.FlagCaptured, function() 

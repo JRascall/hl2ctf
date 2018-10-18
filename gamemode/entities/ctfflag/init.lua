@@ -11,7 +11,7 @@ util.AddNetworkString(FlagNetEvents.FlagCaptured)
 function ENT:Initialize()
     self:SetModel("models/items/item_item_crate.mdl")
     self:PhysicsInit(SOLID_VPHYSICS)
-    self:SetMoveType(MOVETYPE_NONE)
+    self:SetMoveType(MOVETYPE_FLY)
     self:SetSolid(SOLID_VPHYSICS)
     self.TEAM = self:GetVar("TEAM")
     if (self.TEAM == "red") then
