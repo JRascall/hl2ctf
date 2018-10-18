@@ -31,6 +31,25 @@ function GM:PlayerSpawn(ply)
     ply:SetNWBool("HasFlag", false)
 end
 
+function GM:PlayerDeath(ply, weapon, attacker)
+    print("Death!")
+    OnPlayerDeath(ply)
+end
+
+function OnPlayerDeath(ply) 
+    local hasFlag = ply:GetNWBool("HasFlag")
+    if hasFlag == true then
+        local teamID = ply:Team()
+        local team = string.lower(team.GetName(teamID))
+        SendMessageToAllPlayers(team .. " flag dropped")
+        if team == "blue" then 
+            SpawnFlag("red", ply:GetPos())
+        elseif team == "red" then 
+            SpawnFlag("blue", ply:GetPos())
+        end
+    end
+end
+
 function SendMessageToAllPlayers(text) 
     for k, ply in pairs(player.GetAll()) do
         ply:ChatPrint(text)
@@ -79,7 +98,7 @@ end)
 function SpawnFlag(type, pos) 
     local flag = ents.Create("ctfflag");
     if(IsValid(flag) == false) then return end
-    flag:SetPos(pos)
+    flag:SetPos(pos + Vector(12, 12, 12))
     flag:SetVar("TEAM", type)
     flag:Spawn()
 end
