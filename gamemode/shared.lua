@@ -3,6 +3,10 @@ GM.Author = "JRascall"
 GM.Email = "N/A"
 GM.WebSite = "N/A"
 
+CTFNetEvents = {
+    FlagCaptured = "FlagCaptured",
+    FlagScored = "FlagScored",
+}
 
 team.SetUp(0, "Red", Color(255, 0, 0), true)
 team.SetUp(1, "Blue", Color(0, 0, 255), true)

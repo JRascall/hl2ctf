@@ -14,10 +14,17 @@ end)
 timer.Create('minusSeconds', 1, 0, function() roundTimeSecs = roundTimeSecs - 1  end)
 
 net.Receive(ERoundEvents.R_STARTED, function(len) 
-    print("NET MESSAGE - Round Started")
     roundTimeSecs = TimeEachRound
 end)
 
 net.Receive(ERoundEvents.R_ENDED, function(len)
-    print("NET MESSAGE - Round Ended")
+    roundTimeSecs = -1
+end)
+
+net.Receive(ERoundEvents.R_WARNING, function(len, ply) 
+    local type = net.ReadInt(3)
+    if type == 3 then  surface.PlaySound("3_minutes_remain.wav") 
+    elseif type == 2 then  surface.PlaySound("2_minutes_remain.wav")
+    elseif type == 1 then  surface.PlaySound("1_minute_remains.wav")
+    end
 end)
