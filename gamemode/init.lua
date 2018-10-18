@@ -66,8 +66,12 @@ hook.Add("attemptingToScore", "playerAttemptingToScore", function(ply)
         net.Broadcast()
         ply:SetNWBool("HasFlag", false)
 
-        if team == "blue" then SpawnFlag("red", mapSpawns["red"])
-        elseif team == "red" then SpawnFlag("blue", mapSpawns["blue"])
+        SendMessageToAllPlayers(ply:GetName() .. " has scored a point for the " .. team .. " team")
+
+        if team == "blue" then 
+            SpawnFlag("red", mapSpawns["red"])
+        elseif team == "red" then 
+            SpawnFlag("blue", mapSpawns["blue"])
         end
     end
 end)
