@@ -41,11 +41,12 @@ function OnPlayerDeath(ply)
     if hasFlag == true then
         local teamID = ply:Team()
         local team = string.lower(team.GetName(teamID))
-        SendMessageToAllPlayers(team .. " flag dropped")
         if team == "blue" then 
             SpawnFlag("red", ply:GetPos())
+            SendMessageToAllPlayers("red" .. " flag dropped")
         elseif team == "red" then 
             SpawnFlag("blue", ply:GetPos())
+            SendMessageToAllPlayers("blue" .. " flag dropped")
         end
     end
 end
@@ -62,6 +63,11 @@ end)
 
 hook.Add(ERoundEvents.R_ENDED, "roundEnded", function()
     SendMessageToAllPlayers("Round has ended!")
+
+    SendMessageToAllPlayers("Round will start shortly")
+    timer.Simple(30, function()
+        RoundManager:StartRound()
+    end)
 end)
 
 hook.Add("flagCaptured", "playerCapturedFlag", function(ply, team) 
@@ -79,17 +85,18 @@ hook.Add("attemptingToScore", "playerAttemptingToScore", function(ply)
     local hasFlag = ply:GetNWBool("HasFlag")
     if hasFlag then
         local teamId = ply:Team()
-        local team = string.lower(team.GetName(teamId))
+        local teamName = string.lower(team.GetName(teamId))
         net.Start(CTFNetEvents.FlagScored)
-        net.WriteString(team)
+        net.WriteString(teamName)
         net.Broadcast()
         ply:SetNWBool("HasFlag", false)
 
-        SendMessageToAllPlayers(ply:GetName() .. " has scored a point for the " .. team .. " team")
+        SendMessageToAllPlayers(ply:GetName() .. " has scored a point for the " .. teamName .. " team")
+        team.SetScore(teamId, team.GetScore(teamId) + 1)
 
-        if team == "blue" then 
+        if teamName == "blue" then 
             SpawnFlag("red", mapSpawns["red"])
-        elseif team == "red" then 
+        elseif teamName == "red" then 
             SpawnFlag("blue", mapSpawns["blue"])
         end
     end
